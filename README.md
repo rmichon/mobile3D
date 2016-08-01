@@ -1,1 +1,1 @@
-# mobile3D
+Run ./generateDocumentation to build the documentation of this library.

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+FILES=$(ls lib/*.scad)
+OUT=$(cat "misc/intro.md")
+OUT=$OUT$'\n'
+
+for p in $FILES; do
+	OUT=$OUT$(cat "$p" | grep ^// | sed 's/\/\/ //')
+	OUT=$OUT$'\n'
+done
+
+echo "$OUT" > documentation.md
