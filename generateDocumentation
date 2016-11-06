@@ -9,4 +9,4 @@ for p in $FILES; do
 	OUT=$OUT$'\n'
 done
 
-echo "$OUT" > documentation.md
+echo "$OUT" > README.md
