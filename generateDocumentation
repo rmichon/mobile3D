@@ -5,8 +5,7 @@ OUT=$(cat "misc/intro.md")
 OUT=$OUT$'\n'
 
 for p in $FILES; do
-	OUT=$OUT$(cat "$p" | grep ^// | sed 's/\/\/ //')
-	OUT=$OUT$'\n'
+    OUT=$OUT$(faust2md $p)
 done
 
 echo "$OUT" > README.md

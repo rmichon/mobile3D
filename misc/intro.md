@@ -1,4 +1,4 @@
-# Mobile Device Augmentation Library
+# Mobile 3D: Mobile Device Augmentation Library
 
 This library contains a set of variables and functions to facilitate the design of mobile device augmentations towards musical instrument making. The main idea behind this concept is to place mobile devices at the heart of hybrid musical instruments that are partly physical and partly virtual. In its current state, this library focuses on passive augmentations that leverage elements already present on the device: microphone, speaker, sensors (accelerometers, gyroscope, touch screen, etc.).
 
@@ -17,4 +17,4 @@ The `/examples` folder contains a series of examples demonstrating how to use th
 
 Check out the [CCRMA composed instrument summer workshop website](https://ccrma.stanford.edu/~rmichon/composedInstrumentWorkshop/) for some concrete use examples of `mobile3D`.
 
-## API Reference
+# API Reference
