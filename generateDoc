@@ -5,7 +5,7 @@ OUT=$(cat "misc/intro.md")
 OUT=$OUT$'\n'
 
 for p in $FILES; do
-    OUT=$OUT$(faust2md $p)
+    OUT=$OUT$(misc/scad2md $p)
 done
 
 echo "$OUT" > README.md

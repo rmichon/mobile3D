@@ -3,9 +3,9 @@
 //################################################
 
 //-----------------`roundedCube`--------------
-// Arguments: `roundedCube(dimension,edgeRadius)`
-//
 // A cube with rounded edges on the depth axis. This function is helpful for creating simple phone shapes.
+//
+// `roundedCube(dimension,edgeRadius)`
 //
 // #### Where
 //
@@ -29,9 +29,9 @@ module roundedCube(dimension=[10,10,10],edgeRadius=1){
 }
 
 //-----------------------`bottomHolder`---------------------------
-// Arguments: `bottomHolder(deviceWidth,deviceDepth,deviceEdgeRadius,deviceHeightInHolder,wallThickness,holderEdgeRadius)`
-//
 // A basic generic element to hold the bottom part of a device
+//
+// `bottomHolder(deviceWidth,deviceDepth,deviceEdgeRadius,deviceHeightInHolder,wallThickness,holderEdgeRadius)`
 //
 // #### Where
 //
@@ -57,9 +57,9 @@ deviceHeightInHolder=10,wallThickness=1,holderEdgeRadius=1){
 }
 
 //-----------------`topHolder`--------------------------
-// Arguments: `topHolder(deviceWidth,deviceDepth,deviceEdgeRadius,deviceHeightInHolder,wallThickness,lipsWidth,holderEdgeRadius)`
-//
 // A basic generic element to hold the top part of a device
+//
+// `topHolder(deviceWidth,deviceDepth,deviceEdgeRadius,deviceHeightInHolder,wallThickness,lipsWidth,holderEdgeRadius)`
 //
 // #### Where
 //
@@ -87,9 +87,9 @@ wallThickness=1,lipsWidth=2,holderEdgeRadius=1){
 }
 
 //-----------------`rectangleCircularHorn`-----------------------
-// Arguments: `rectangleCircularHorn(rectangleWidth,rectangleHeight,circleRadius,hornLength,wallThickness,hornDeformationFactor,hornDerivation,endsHeight)`
-//
 // A horn with a square termination on one side and a circle termination on the other.
+//
+// `rectangleCircularHorn(rectangleWidth,rectangleHeight,circleRadius,hornLength,wallThickness,hornDeformationFactor,hornDerivation,endsHeight)`
 //
 // #### Where
 //
@@ -123,9 +123,9 @@ hornDeformationFactor=1,hornDerivation=0,endsHeight=0.5){
 }
 
 //-----------------`halfSphere`-----------------------
-// Arguments: `halfSphere(radius)`
-//
 // A half sphere useful to create tops.
+//
+// `halfSphere(radius)`
 //
 // #### Where
 //
@@ -140,9 +140,9 @@ module halfSphere(radius=10){
 }
 
 //-------------------`halfCylinder`-------------------
-// Arguments: `halfCylinder(dimension=[10,10,10])`
-//
 // A half cylinder with controllable height.
+//
+// `halfCylinder(dimension=[10,10,10])`
 //
 // #### Where
 //

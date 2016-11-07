@@ -1,29 +1,34 @@
-// ## iPhone6Plus.scad
-	
-// ### Useful iPod Touch 6 Global Variables
-// Global variables control the dimensions of the different elements contained in this library. Any of them can be overriden right after the library call. This actually is the recommended way to change the dimensions of any of the elements of this library since it will make these modifications globably. Some functions have global variables that are directly associated to them. These are presented with each function. 
-// #### iPod Touch 6 Dimensions
-// These variables define the dimension of the iPod Touch 6 as well as the position of its different elements: speaker, audio jack, ligthening port, etc.
-// * `iPhone6Plus_Width`: the width of the iPod Touch 6
-// * `iPhone6Plus_Depth`: the depth of the iPod Touch 6
-// * `iPhone6Plus_Height`: the height of the iPod Touch 6
-// * `iPhone6Plus_EdgeRadius`: the radius of the vertical edges of the iPod Touch 6
+//===================`iPhone6Plus.scad`=======================
+// This library provides a series of tools to design iPhone 6 Plus augmentations as well as various ready-to-use elements.
+//============================================================
+
+include <basics.scad>
+
+//-------------Useful iPhone 6 Plus Global Variables-----------------
+// Global variables control the dimensions of the different elements contained in this library. Any of them can be overriden right after the library call. This actually is the recommended way to change the dimensions of any of the elements of this library since it will make these modifications globably. Some functions have global variables that are directly associated to them. These are presented with each function.
+//
+// #### iPhone 6 Plus Dimensions
+//
+// These variables define the dimension of the iPhone 6 Plus as well as the position of its different elements: speaker, audio jack, ligthening port, etc.
+// * `iPhone6Plus_Width`: the width of the iPhone 6 Plus
+// * `iPhone6Plus_Depth`: the depth of the iPhone 6 Plus
+// * `iPhone6Plus_Height`: the height of the iPhone 6 Plus
+// * `iPhone6Plus_EdgeRadius`: the radius of the vertical edges of the iPhone 6 Plus
 // * `iPhone6Plus_Module_WallThickness`: the global wall thickness of the different modules
+//
 // #### Colors
+//
 // * `color_DarkGrey`
 // * `color_BlackNinjaFlex`
 // * `color_WhiteAcrylic`
 // * `color_OrangeAcrylic`
 // * `color_BluePLA`
-	// This library provides a series of tools to design iPhone6Plus augmentations as well as various ready-to-use elements. 
+//---------------------------------------------------------------
 
-include <basics.scad>
 iPhone6Plus_Width = 77.8;
 iPhone6Plus_Depth = 7.1;
 iPhone6Plus_Height = 158.1;
 iPhone6Plus_EdgeRadius = 8;
-
-
 
 iPhone6Plus_Module_WallThickness = 2;
 
@@ -33,22 +38,29 @@ color_WhiteAcrylic = [1,1,1,];
 color_OrangeAcrylic = [1,0.27,0];
 color_BluePLA = [0.12,0.56,1];
 
-// ### `iPhone6Plus()`
+//-------------`iPhone6Plus`-------------------------------
 // A very simple iPhone 6 model.
+//---------------------------------------------------------
 module iPhone6Plus(){
 	color(color_DarkGrey)
 		roundedCube([iPhone6Plus_Width,iPhone6Plus_Depth,iPhone6Plus_Height],iPhone6Plus_EdgeRadius);
 }
 
-// ### `iPhone6Plus_BottomHolder(wallThickness,depth,speakerHole,audioJackHole,lighteningHole)`
-// A customizable element that can be used to hold an iPod Touch 6 from the bottom. This part is meant to be printed with an elastic material such as Ninjaflex.
+//-------------`iPhone6Plus_BottomHolder`-------------------------
+// A customizable element that can be used to hold an iPhone 6 Plus from the bottom. This part is meant to be printed with an elastic material such as Ninjaflex.
+//
+// `iPhone6Plus_BottomHolder(wallThickness,depth,speakerHole,audioJackHole,lighteningHole)`
+//
 // #### Where
+//
 // * `wallThickness`: the thickness of the walls
 // * `deviceInnerHeight`: the depth of the device in the holder  
 // * `speakerHole`: hides the speaker hole if false
 // * `audioJackHole`: hides the audio jack hole if false
 // * `lighteningHole`: hides the lightening port hole if false
+//
 // #### Associated Global Variables
+//
 // * `iPhone6Plus_BottomHolder_Depth`: the depth of the device in the holder
 // * `iPhone6Plus_BottomHolder_HomeButtonHoleRadius`: the radius of the home button hole
 // * `iPhone6Plus_BottomHolder_SpeakerHoleWidth`: the speaker hole width
@@ -59,6 +71,8 @@ module iPhone6Plus(){
 // * `iPhone6Plus_BottomHolder_AudioJackHoleXOffset`: the audio jack hole X position
 // * `iPhone6Plus_BottomHolder_LighteningHoleWidth`: the lightening hole width
 // * `iPhone6Plus_BottomHolder_LighteningHoleHeight`: the lightening hole height
+//----------------------------------------------------------------
+
 iPhone6Plus_BottomHolder_Depth = 12;
 iPhone6Plus_BottomHolder_HomeButtonHoleRadius = 6;
 iPhone6Plus_BottomHolder_SpeakerHoleWidth = 17.35;
@@ -112,12 +126,18 @@ speakerHole=true,audioJackHole=true,lighteningHole=true){
 	}
 }
 
-// ### iPhone6Plus_TopHolder(wallThickness,depth) 
-//  An element that can be used to hold an iPod Touch 6 from the top. This part is meant to be printed with an elastic material such as Ninjaflex.
+//----------------`iPhone6Plus_TopHolder`------------------ 
+//  An element that can be used to hold an iPhone 6 Plus from the top. This part is meant to be printed with an elastic material such as Ninjaflex.
+//
+// `iPhone6Plus_TopHolder(wallThickness,depth)`
+//
 // #### Where
+//
 // * `wallThickness`: the thcikness of the walls
-// * `depth`: the depth of the device in the holder 
+// * `depth`: the depth of the device in the holder
+//
 // #### Associated Global Variables
+//
 // * `iPhone6Plus_TopHolder_Depth`: the depth of the device in the holder
 // * `iPhone6Plus_TopHolder_CameraHoleRadius`: the radius of the camera hole
 // * `iPhone6Plus_TopHolder_CameraHoleXOffset`: the camera hole X position
@@ -126,6 +146,8 @@ speakerHole=true,audioJackHole=true,lighteningHole=true){
 // * `iPhone6Plus_TopHolder_OnOffHoleHeight`: the on/off button height
 // * `iPhone6Plus_TopHolder_OnOffHoleXOffset`: the on/off button X position
 // * `iPhone6Plus_TopHolder_OnOffHoleYOffset`: the on/off button Y position
+//----------------------------------------------------------
+
 iPhone6Plus_TopHolder_Depth = 12;
 iPhone6Plus_TopHolder_CameraHoleRadius = 5;
 iPhone6Plus_TopHolder_CameraHoleXOffset = 7+6.52;
@@ -150,15 +172,23 @@ module iPhone6Plus_TopHolder(wallThickness=iPhone6Plus_Module_WallThickness,dept
 	}
 }
 
-// ### `iPhone6Plus_BasePlate(wallThickness,plateThickness)`
-// A simple plate to put the bottom and top holder together. This part is meant to be laser cut from an acrylic plate. 
+//--------------`iPhone6Plus_BasePlate`--------------------------
+// A simple plate to put the bottom and top holder together. This part is meant to be laser cut from an acrylic plate.
+//
+// `iPhone6Plus_BasePlate(wallThickness,plateThickness)`
+//
 // #### Where
+//
 // * `deviceWidth`: the width of the device
 // * `deviceHeight`: the height of the device
 // * `wallThickness`: the wall thickness of the top and bottom holders
 // * `plateThickness`: the thickness of the plate 
+//
 // #### Associated Global Variables
+//
 // * `iPhone6Plus_BasePlate_Thickness`: the thickness of the plate
+//-----------------------------------------------------------------------
+
 iPhone6Plus_BasePlate_Thickness = 3.175;
 module iPhone6Plus_BasePlate(deviceWidth=iPhone6Plus_Width,deviceHeight=iPhone6Plus_Height,
 wallThickness=iPhone6Plus_Module_WallThickness,plateThickness=iPhone6Plus_BasePlate_Thickness){
@@ -167,9 +197,13 @@ wallThickness=iPhone6Plus_Module_WallThickness,plateThickness=iPhone6Plus_BasePl
 	}
 }
 
-// ### `iPhone6Plus_PlateWithSideHandle(height,handleWidth,handleHoleWidth,handleHoleBorder,wallThickness,plateThickness,edgeRadius)`
-// A simple plate where the iPod Touch 6 can be mounted using `iPhone6Plus_BottomHolder` and `iPhone6Plus_TopHolder` and that adds a side handle to the device. This part is meant to be laser cut from an acrylic plate.
+//---------------`iPhone6Plus_PlateWithSideHandle`----------------------
+// A simple plate where the iPhone 6 Plus can be mounted using `iPhone6Plus_BottomHolder` and `iPhone6Plus_TopHolder` and that adds a side handle to the device. This part is meant to be laser cut from an acrylic plate.
+//
+// `iPhone6Plus_PlateWithSideHandle(height,handleWidth,handleHoleWidth,handleHoleBorder,wallThickness,plateThickness,edgeRadius)`
+//
 // #### Where
+//
 // * `height`: the height of the plate
 // * `handleWidth`: the width of the handle
 // * `handleHoleBorder`: the size of the border of the handle hole
@@ -177,12 +211,16 @@ wallThickness=iPhone6Plus_Module_WallThickness,plateThickness=iPhone6Plus_BasePl
 // * `wallThickness`: the global wall thickness
 // * `plateThickness`: the thickness of the plate
 // * `edgeRadius`: the vertical edge radius
+//
 // #### Associated Global Variables
+//
 // * `iPhone6Plus_PlateWithHandle_HandleWidth`: the width of the handle
 // * `iPhone6Plus_PlateWithHandle_HandleHoleWidth`: the size of the handle hole
 // * `iPhone6Plus_PlateWithHandle_HandleHoleBorder`: the size of the border of the handle hole
 // * `iPhone6Plus_PlateWithHandle_Thickness`: the plate thickness
 // * `iPhone6Plus_PlateWithHandle_EdgeRadius`: the vertical edge radius
+//----------------------------------------------------------------------
+
 iPhone6Plus_PlateWithHandle_HandleWidth = 72;
 iPhone6Plus_PlateWithHandle_HandleHoleWidth = 34;
 iPhone6Plus_PlateWithHandle_HandleHoleBorder = 14;
@@ -202,16 +240,24 @@ plateThickness=iPhone6Plus_PlateWithHandle_Thickness,edgeRadius=iPhone6Plus_Plat
 	}
 }
 
-// ### `iPhone6Plus_HolderPlate(handleWidth,wallThickness,plateThickness)`
-// A simple plate where the iPod Touch 6 can be mounted using `iPhone6Plus_BottomHolder` and `iPhone6Plus_TopHolder` and that adds handles to the device. This part is meant to be laser cut from an acrylic plate.
+//-------------`iPhone6Plus_HolderPlate`-------------------
+// A simple plate where the iPhone 6 Plus can be mounted using `iPhone6Plus_BottomHolder` and `iPhone6Plus_TopHolder` and that adds handles to the device. This part is meant to be laser cut from an acrylic plate.
+//
+// `iPhone6Plus_HolderPlate(handleWidth,wallThickness,plateThickness)`
+//
 // #### Where
+//
 // * `handleWidth`: the width of the handles around the device
 // * `wallThickness`: the global wall thickness
 // * `plateThickness`: the plate thickness
+//
 // #### Associated Global Variables
+//
 // * `iPhone6Plus_HolderPlate_Thickness`: the plate thickness
 // * `iPhone6Plus_HolderPlate_HandlesWidth`: the width of the handles around the device
 // * `iPhone6Plus_HolderPlate_EdgeRadius`: the radius of the vertical edges of the plate
+//---------------------------------------------------------
+
 iPhone6Plus_HolderPlate_Thickness = 6.35;
 iPhone6Plus_HolderPlate_HandlesWidth = 50;
 iPhone6Plus_HolderPlate_EdgeRadius = 10;
@@ -223,18 +269,26 @@ plateThickness=iPhone6Plus_HolderPlate_Thickness){
 	}
 }
 
-// ### `iPhone6Plus_HolderPlateElec(handleWidth,wallThickness,plateThickness,elecModuleHeight,elecModuleEdgeRadius)`
+//----------------`iPhone6Plus_HolderPlateElec`----------------------
 // Similar to `iPhone6Plus_HolderPlate()` except that a module has been adeed to install electronic components to it. This part is meant to be laser cut from an acrylic plate.
+//
+// `iPhone6Plus_HolderPlateElec(handleWidth,wallThickness,plateThickness,elecModuleHeight,elecModuleEdgeRadius)`
+//
 // #### Where
+//
 // * `handleWidth`: the size of the handles
 // * `wallThickness`: the global wall thickness
 // * `plateThickness`: the plate thickness
 // * `elecModuleHeight`: the electronic module height
 // * `elecModuleEdgeRadius`: the electronic module edge radius
+//
 // #### Associated Global Variables
+//
 // * `iPhone6Plus_HolderPlateElec_ModuleHeight`: the electronic module height 
 // * `iPhone6Plus_HolderPlateElec_ModuleEdgeRadius`: the electronic module edge radius
 // * `iPhone6Plus_HolderPlateElec_BoxHoleRadius`: the radius of the screw holes
+//---------------------------------------------------------------------
+
 iPhone6Plus_HolderPlateElec_ModuleHeight = 44;
 iPhone6Plus_HolderPlateElec_ModuleEdgeRadius = 4;
 iPhone6Plus_HolderPlateElec_BoxHoleRadius = 1.5;
@@ -271,15 +325,23 @@ elecModuleEdgeRadius=iPhone6Plus_HolderPlateElec_ModuleEdgeRadius){
 	}
 }
 
-// ### `iPhone6Plus_HolderPlateElecTop(wallThickness,plateThickness,elecModuleHeight,elecModuleEdgeRadius)`
+//----------------`iPhone6Plus_HolderPlateElecTop`-------------------
 // A simple cover for the electronic components used with `iPhone6Plus_HolderPlateElec`. This part is meant to be laser cut from an acrylic plate.
+//
+// `iPhone6Plus_HolderPlateElecTop(wallThickness,plateThickness,elecModuleHeight,elecModuleEdgeRadius)`
+//
 // #### Where
+//
 // * `wallThickness`: the global wall thickness
 // * `plateThickness`: the plate thickness
 // * `elecModuleHeight`: the electronic module height
 // * `elecModuleEdgeRadius`: the electronic module edge radius
+//
 // #### Associated Global Variables
+//
 // * `iPhone6Plus_HolderPlateElecTop_Thickness`: the plate thickness
+//-------------------------------------------------------------------
+
 iPhone6Plus_HolderPlateElecTop_Thickness = 3.125;
 module iPhone6Plus_HolderPlateElecTop(wallThickness=iPhone6Plus_Module_WallThickness,elecModuleHeight=iPhone6Plus_HolderPlateElec_ModuleHeight,
 elecModuleEdgeRadius=iPhone6Plus_HolderPlateElec_ModuleEdgeRadius){
@@ -306,9 +368,13 @@ elecModuleEdgeRadius=iPhone6Plus_HolderPlateElec_ModuleEdgeRadius){
 	}
 }
 
-// ### `iPhone6Plus_GenericHorn(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness)`
-// A customizable horn that plugs to the built-in speaker of the iPod Touch. It comes with a base plate that is used to easily glue the horn to the bottom holder. This part is meant to be printed with PLA or ABS.
+//-----------------`iPhone6Plus_GenericHorn`-------------------
+// A customizable horn that plugs to the built-in speaker of the iPhone 6 Plus. It comes with a base plate that is used to easily glue the horn to the bottom holder. This part is meant to be printed with PLA or ABS.
+//
+// `iPhone6Plus_GenericHorn(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness)`
+//
 // #### Where
+//
 // * `hornRadius`: the radius of the circular end of the horn
 // * `hornLength`: the length of the horn
 // * `hornDeformationFactor`: controls the vertical flatness of the horn with (1=perfect circle, >1=flatened circle) 
@@ -317,6 +383,8 @@ elecModuleEdgeRadius=iPhone6Plus_HolderPlateElec_ModuleEdgeRadius){
 // * `hornThickness`: the thickness of the walls of the horn
 // * `basePlateThickness`: the thickness of the base plate
 // * `lighteningConnectorHole`: if true, adds a hole to the base plate for the ligthening connector
+//---------------------------------------------------------------
+
 module iPhone6Plus_GenericHorn(hornRadius=iPhone6Plus_LargePassiveAmp_HornRadius,hornLength=iPhone6Plus_LargePassiveAmp_HornLength,
 hornDeformationFactor=iPhone6Plus_LargePassiveAmp_HornDeformationFactor,hornDerivation=iPhone6Plus_LargePassiveAmp_HornDerivation,
 wallThickness=iPhone6Plus_Module_WallThickness,hornThickness=iPhone6Plus_LargePassiveAmp_HornThickness,
@@ -349,9 +417,13 @@ basePlateThickness=iPhone6Plus_LargePassiveAmp_BaseThickness,lighteningConnector
 	}
 }
 
-// ### `iPhone6Plus_SmallPassiveAmp(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness)`
-// A small passive amplifier for the iPod Touch 6 that can be glued to `iPhone6Plus_BottomHolder`. This part is meant to be printed with PLA or ABS.
+//--------------`iPhone6Plus_SmallPassiveAmp`--------------
+// A small passive amplifier for the iPhone 6 Plus that can be glued to `iPhone6Plus_BottomHolder`. This part is meant to be printed with PLA or ABS.
+//
+// `iPhone6Plus_SmallPassiveAmp(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness)`
+//
 // #### Where
+//
 // * `hornRadius`: the radius of the circular end of the horn
 // * `hornLength`: the length of the horn
 // * `hornDeformationFactor`: controls the vertical flatness of the horn with (1=perfect circle, >1=flatened circle) 
@@ -359,13 +431,17 @@ basePlateThickness=iPhone6Plus_LargePassiveAmp_BaseThickness,lighteningConnector
 // * `wallThickness`: the thickness of the walls of the different modules
 // * `hornThickness`: the thickness of the walls of the horn
 // * `basePlateThickness`: the thickness of the base plate
+//
 // #### Associated Global Variables
+//
 // * `iPhone6Plus_SmallPassiveAmp_HornRadius`: the radius of the circular end of the horn
 // * `iPhone6Plus_SmallPassiveAmp_HornLength`: the length of the horn
 // * `iPhone6Plus_SmallPassiveAmp_HornDeformationFactor`: controls the vertical flatness of the horn with (1=perfect circle, >1=flatened circle) 
 // * `iPhone6Plus_SmallPassiveAmp_HornDerivation`: displace the position of the circular end relatively to the rectangular end on the horizontal axis
 // * `iPhone6Plus_SmallPassiveAmp_BaseThickness`: the thickness of the base plate
 // * `iPhone6Plus_SmallPassiveAmp_HornThickness`: the thickness of the walls of the horn
+//---------------------------------------------------------
+
 iPhone6Plus_SmallPassiveAmp_HornRadius = 30;
 iPhone6Plus_SmallPassiveAmp_HornLength = 25;
 iPhone6Plus_SmallPassiveAmp_HornDeformationFactor = 0.5;
@@ -382,9 +458,13 @@ baseThickness=iPhone6Plus_SmallPassiveAmp_BaseThickness){
 	}
 }
 
-// ### `iPhone6Plus_LargePassiveAmp(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness,reinforcementBarWidth)`
-// A large passive amplifier with a reinforcement bar for the iPod Touch 6 that can be glued to `iPhone6Plus_BottomHolder`. This part is meant to be printed with PLA or ABS. 
+//---------------`iPhone6Plus_LargePassiveAmp`----------------
+// A large passive amplifier with a reinforcement bar for the iPhone 6 Plus that can be glued to `iPhone6Plus_BottomHolder`. This part is meant to be printed with PLA or ABS. 
+//
+// `iPhone6Plus_LargePassiveAmp(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness,reinforcementBarWidth)`
+//
 // #### Where
+//
 // * `hornRadius`: the radius of the circular end of the horn
 // * `hornLength`: the length of the horn
 // * `hornDeformationFactor`: controls the vertical flatness of the horn with (1=perfect circle, >1=flatened circle) 
@@ -393,7 +473,9 @@ baseThickness=iPhone6Plus_SmallPassiveAmp_BaseThickness){
 // * `hornThickness`: the thickness of the walls of the horn
 // * `basePlateThickness`: the thickness of the base plate
 // * `reinforcementBarWidth`: the width of the reinforcement bar
+//
 // #### Associated Global Variables
+//
 // * `iPhone6Plus_LargePassiveAmp_HornRadius`: the radius of the circular end of the horn
 // * `iPhone6Plus_LargePassiveAmp_HornLength`: the length of the horn
 // * `iPhone6Plus_LargePassiveAmp_HornDeformationFactor`: controls the vertical flatness of the horn with (1=perfect circle, >1=flatened circle) 
@@ -401,6 +483,8 @@ baseThickness=iPhone6Plus_SmallPassiveAmp_BaseThickness){
 // * `iPhone6Plus_LargePassiveAmp_BaseThickness`: the thickness of the base plate
 // * `iPhone6Plus_LargePassiveAmp_HornThickness`: the thickness of the walls of the horn
 // * `iPhone6Plus_LargePassiveAmp_ReinforcementBarWidth`: the width of the reinforcement bar
+//--------------------------------------------------------------
+
 iPhone6Plus_LargePassiveAmp_HornRadius = 40;
 iPhone6Plus_LargePassiveAmp_HornLength = 90;
 iPhone6Plus_LargePassiveAmp_HornDeformationFactor = 0.75;
@@ -438,8 +522,10 @@ baseThickness=iPhone6Plus_SpeakerMouthPipe_BaseThickness){
 	}
 }
 
-// ### `iPhone6Plus_Case()`
-// A simple iPod Touch 6 case.
+//---------------`iPhone6Plus_Case`----------------
+// A simple iPhone 6 Plus case.
+//------------------------------------------------
+
 module iPhone6Plus_Case(){
 	iPhone6Plus_BottomHolder();
 	translate([0,iPhone6Plus_Depth+iPhone6Plus_Module_WallThickness*2,0])iPhone6Plus_BasePlate();
@@ -448,7 +534,7 @@ module iPhone6Plus_Case(){
 };
 
 // ### `iPhone6Plus_CaseWithSideHandle()`
-// A iPod Touch 6 case with a side handle.
+// A iPhone 6 Plus case with a side handle.
 module iPhone6Plus_CaseWithSideHandle(){
 	iPhone6Plus_BottomHolder();
 	translate([0,iPhone6Plus_Depth+iPhone6Plus_Module_WallThickness*2,0])iPhone6Plus_PlateWithSideHandle();
@@ -456,8 +542,10 @@ module iPhone6Plus_CaseWithSideHandle(){
 		iPhone6Plus_TopHolder();
 }
 
-// ### `iPhone6Plus_CaseWithSmallPassiveAmp()`
-// A case for the iPod Touch 6 with a small passive amplifier.
+//---------------`iPhone6Plus_CaseWithSmallPassiveAmp`----------------
+// A case for the iPhone 6 Plus with a small passive amplifier.
+//-------------------------------------------------------------------
+
 module iPhone6Plus_CaseWithSmallPassiveAmp(){
 	iPhone6Plus_SmallPassiveAmp();
 	translate([0,0,iPhone6Plus_SmallPassiveAmp_HornLength+iPhone6Plus_SmallPassiveAmp_BaseThickness])
@@ -470,7 +558,7 @@ module iPhone6Plus_CaseWithSmallPassiveAmp(){
 }
 
 // ### `iPhone6Plus_CaseWithLargePassiveAmp()`
-// A case for the iPod Touch 6 with a large passive amplifier.
+// A case for the iPhone 6 Plus with a large passive amplifier.
 module iPhone6Plus_CaseWithLargePassiveAmp(){
 	iPhone6Plus_LargePassiveAmp();
 	translate([0,0,iPhone6Plus_LargePassiveAmp_HornLength+iPhone6Plus_LargePassiveAmp_BaseThickness])
@@ -482,8 +570,10 @@ module iPhone6Plus_CaseWithLargePassiveAmp(){
 		iPhone6Plus_TopHolder();
 }
 
-// ### `iPhone6Plus_CaseWithSmallPassiveAmp()`
-// A case for the iPod Touch 6 with a small passive amplifier.
+//------------`iPhone6Plus_CaseWithSmallPassiveAmp`----------------
+// A case for the iPhone 6 Plus with a small passive amplifier.
+//---------------------------------------------------------------
+
 module iPhone6Plus_CaseWithSpeakerMouthPipe(){
 	iPhone6Plus_SpeakerMouthPipe();
 	translate([0,0,iPhone6Plus_SpeakerMouthPipe_HornLength+iPhone6Plus_SpeakerMouthPipe_BaseThickness])
@@ -495,8 +585,10 @@ module iPhone6Plus_CaseWithSpeakerMouthPipe(){
 		iPhone6Plus_TopHolder();
 }
 
-// ### `iPhone6Plus_CaseWithSideHandleAndPassiveAmp()`
-// An iPod Touch 6 case with a side handle and a small passive amplifier.
+//------------`iPhone6Plus_CaseWithSideHandleAndPassiveAmp`---------------
+// An iPhone 6 Plus case with a side handle and a small passive amplifier.
+//------------------------------------------------------------------------
+-
 module iPhone6Plus_CaseWithSideHandleAndPassiveAmp(){
 	iPhone6Plus_SmallPassiveAmp();
 	translate([0,iPhone6Plus_Depth+iPhone6Plus_Module_WallThickness*2,iPhone6Plus_SmallPassiveAmp_HornLength+iPhone6Plus_SmallPassiveAmp_BaseThickness])
@@ -509,7 +601,7 @@ module iPhone6Plus_CaseWithSideHandleAndPassiveAmp(){
 }
 
 // ### `iPhone6Plus_CaseTop()`
-// A case that turn the iPod Touch 6 into a top.
+// A case that turn the iPhone 6 Plus into a top.
 module iPhone6Plus_CaseTop(){
 	iPhone6Plus_CaseWithSmallPassiveAmp();
 	color(color_BluePLA){
@@ -521,12 +613,20 @@ module iPhone6Plus_CaseTop(){
 	}
 }
 
-// ### `iPhone6Plus_CaseRock()`
-// A iPod Touch 6 case with a swing on it to rock it.
+//------------`iPhone6Plus_CaseRock`---------------------------
+// A iPhone 6 Plus case with a swing on it to rock it.
+//
+// `iPhone6Plus_CaseRock(swingWidth)`
+//
 // #### Where
+//
 // * `swingWidth`: the width of the swing
+//
 // #### Associated Global Variables
+//
 // * `iPhone6Plus_CaseRock_SwingWidth`: the width of the swing
+//-------------------------------------------------------------
+
 iPhone6Plus_CaseRock_SwingWidth = 20;
 module iPhone6Plus_CaseRock(swingWidth = iPhone6Plus_CaseRock_SwingWidth){
 	iPhone6Plus_CaseWithSmallPassiveAmp();
@@ -540,8 +640,10 @@ module iPhone6Plus_CaseRock(swingWidth = iPhone6Plus_CaseRock_SwingWidth){
 	}
 }
 
-// ### `iPhone6Plus_HolderWithElectronics()`
-// A case for the iPod Touch 6 with handles and that can host extra electronic components.
+//-------------`iPhone6Plus_HolderWithElectronics`-----------------
+// A case for the iPhone 6 Plus with handles and that can host extra electronic components.
+//-------------------------------------------------------------------
+
 iPhone6Plus_HolderPlateElec_ModuleInterplateSpace = 25;
 module iPhone6Plus_CaseWithElectronics(){
 	module screwElec(){
