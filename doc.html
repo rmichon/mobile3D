@@ -1,0 +1,970 @@
+<h1 id="mobile-3d-mobile-device-augmentation-library">Mobile 3D: Mobile Device Augmentation Library</h1>
+<p>This library contains a set of variables and functions to facilitate the design of mobile device augmentations towards musical instrument making. The main idea behind this concept is to place mobile devices at the heart of hybrid musical instruments that are partly physical and partly virtual. In its current state, this library focuses on passive augmentations that leverage elements already present on the device: microphone, speaker, sensors (accelerometers, gyroscope, touch screen, etc.).</p>
+<p>This documentation was generated using the <code>generateDocumentation</code> script contained in this repository.</p>
+<h2 id="supported-devices">Supported Devices</h2>
+<ul>
+<li>iPhone 5 (see <code>iPhone5.scad</code>)</li>
+<li>iPod Touch 6 (see <code>iPodTouch6.scad</code>)</li>
+<li>iPhone 6 (see <code>iPhone6.scad</code>)</li>
+<li>iPhone 6 Plus (see <code>iPhone6Plus.scad</code>)</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<p>The <code>/examples</code> folder contains a series of examples demonstrating how to use this library.</p>
+<p>Check out the <a href="https://ccrma.stanford.edu/~rmichon/composedInstrumentWorkshop/">CCRMA composed instrument summer workshop website</a> for some concrete use examples of <code>mobile3D</code>.</p>
+<h1 id="api-reference">API Reference</h1>
+<h1 id="basics.scad"><code>basics.scad</code></h1>
+<p>This library contains basic elements to construct mobile device augmentations.</p>
+<h3 id="roundedcube"><code>roundedCube</code></h3>
+<p>A cube with rounded edges on the depth axis. This function is helpful for creating simple phone shapes.</p>
+<p><code>roundedCube(dimension,edgeRadius)</code></p>
+<h4 id="where">Where</h4>
+<ul>
+<li><code>dimension=[width,depth,height]</code>: the size of the cube</li>
+<li><code>edgeRadius</code>: the radius of the rounded edges</li>
+</ul>
+<hr />
+<h3 id="bottomholder"><code>bottomHolder</code></h3>
+<p>A basic generic element to hold the bottom part of a device</p>
+<p><code>bottomHolder(deviceWidth,deviceDepth,deviceEdgeRadius,deviceHeightInHolder,wallThickness,holderEdgeRadius)</code></p>
+<h4 id="where-1">Where</h4>
+<ul>
+<li><code>deviceWidth</code>: the width of the device to be held</li>
+<li><code>deviceDepth</code>: the depth of the device to be held</li>
+<li><code>deviceEdgeRadius</code>: the edge radius of the device to be held</li>
+<li><code>deviceHeightInHolder</code>: the height of the part of the holder covering the device</li>
+<li><code>wallThickness</code>: the holder's wall thickness</li>
+<li><code>holderEdgeRadius</code>: the holder's edge radius</li>
+</ul>
+<hr />
+<h3 id="topholder"><code>topHolder</code></h3>
+<p>A basic generic element to hold the top part of a device</p>
+<p><code>topHolder(deviceWidth,deviceDepth,deviceEdgeRadius,deviceHeightInHolder,wallThickness,lipsWidth,holderEdgeRadius)</code></p>
+<h4 id="where-2">Where</h4>
+<ul>
+<li><code>deviceWidth</code>: the width of the device to be held</li>
+<li><code>deviceDepth</code>: the depth of the device to be held</li>
+<li><code>deviceEdgeRadius</code>: the edge radius of the device to be held</li>
+<li><code>deviceHeightInHolder</code>: the height of the part of the holder covering the device</li>
+<li><code>wallThickness</code>: the holder's wall thickness</li>
+<li><code>lipsWidth</code>: size of the lips holding the device</li>
+<li><code>holderEdgeRadius</code>: the holder's edge radius</li>
+</ul>
+<hr />
+<h3 id="rectanglecircularhorn"><code>rectangleCircularHorn</code></h3>
+<p>A horn with a square termination on one side and a circle termination on the other.</p>
+<p><code>rectangleCircularHorn(rectangleWidth,rectangleHeight,circleRadius,hornLength,wallThickness,hornDeformationFactor,hornDerivation,endsHeight)</code></p>
+<h4 id="where-3">Where</h4>
+<ul>
+<li><code>rectangleWidth</code>: the width of the rectangular termination</li>
+<li><code>rectangleHeight</code>: the height of the rectangular termination</li>
+<li><code>circleRadius</code>: the radius of the circular termination</li>
+<li><code>hornLength</code>: the length of the horn</li>
+<li><code>wallThickness</code>: the thickness of the walls</li>
+<li><code>hornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>hornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>endsHeight</code>: the height of the two ends</li>
+</ul>
+<hr />
+<h3 id="halfsphere"><code>halfSphere</code></h3>
+<p>A half sphere useful to create tops.</p>
+<p><code>halfSphere(radius)</code></p>
+<h4 id="where-4">Where</h4>
+<ul>
+<li><code>radius</code>: the radius of the half sphere</li>
+</ul>
+<hr />
+<h3 id="halfcylinder"><code>halfCylinder</code></h3>
+<p>A half cylinder with controllable height.</p>
+<p><code>halfCylinder(dimension=[10,10,10])</code></p>
+<h4 id="where-5">Where</h4>
+<ul>
+<li><code>dimension=[width,depth,height]</code>: the size of the half cylinder</li>
+</ul>
+<h3 id="iphone5"><code>iPhone5</code></h3>
+<p>A very simple iPhone 5 model.</p>
+<hr />
+<h3 id="iphone5_bottomholder"><code>iPhone5_BottomHolder</code></h3>
+<p>A customizable element that can be used to hold an iPhone 5 from the bottom. This part is meant to be printed with an elastic material such as Ninjaflex.</p>
+<p><code>iPhone5_BottomHolder(wallThickness,depth,speakerHole,audioJackHole,lighteningHole)</code></p>
+<h4 id="where-6">Where</h4>
+<ul>
+<li><code>wallThickness</code>: the thickness of the walls</li>
+<li><code>deviceInnerHeight</code>: the depth of the device in the holder<br />
+</li>
+<li><code>speakerHole</code>: hides the speaker hole if false</li>
+<li><code>audioJackHole</code>: hides the audio jack hole if false</li>
+<li><code>lighteningHole</code>: hides the lightening port hole if false</li>
+</ul>
+<h4 id="associated-global-variables">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone5_BottomHolder_Depth</code>: the depth of the device in the holder</li>
+<li><code>iPhone5_BottomHolder_HomeButtonHoleRadius</code>: the radius of the home button hole</li>
+<li><code>iPhone5_BottomHolder_SpeakerHoleWidth</code>: the speaker hole width</li>
+<li><code>iPhone5_BottomHolder_SpeakerHoleHeight</code>: the speaker hole height</li>
+<li><code>iPhone5_BottomHolder_SpeakerHoleXOffset</code>: the speaker hole X position</li>
+<li><code>iPhone5_BottomHolder_SpeakerHoleYOffset</code>: the speaker hole Y position</li>
+<li><code>iPhone5_BottomHolder_AudioJackHoleWidth</code>: the audio jack hole width</li>
+<li><code>iPhone5_BottomHolder_AudioJackHoleXOffset</code>: the audio jack hole X position</li>
+<li><code>iPhone5_BottomHolder_LighteningHoleWidth</code>: the lightening hole width</li>
+<li><code>iPhone5_BottomHolder_LighteningHoleHeight</code>: the lightening hole height</li>
+</ul>
+<hr />
+<h3 id="iphone5_topholder"><code>iPhone5_TopHolder</code></h3>
+<p>An element that can be used to hold an iPhone 5 from the top. This part is meant to be printed with an elastic material such as Ninjaflex.</p>
+<p>iPhone5_TopHolder(wallThickness,depth)`</p>
+<h3 id="where-7">Where</h3>
+<p><code>wallThickness</code>: the thcikness of the walls <code>depth</code>: the depth of the device in the holder</p>
+<h3 id="associated-global-variables-1">Associated Global Variables</h3>
+<p><code>iPhone5_TopHolder_Depth</code>: the depth of the device in the holder <code>iPhone5_TopHolder_OnOffHoleWidth</code>: the on/off button width <code>iPhone5_TopHolder_OnOffHoleHeight</code>: the on/off button height <code>iPhone5_TopHolder_OnOffHoleXOffset</code>: the on/off button X position <code>iPhone5_TopHolder_OnOffHoleYOffset</code>: the on/off button Y position</p>
+<hr />
+<h3 id="iphone5_baseplate"><code>iPhone5_BasePlate</code></h3>
+<p>A simple plate to put the bottom and top holder together. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPhone5_BasePlate(wallThickness,plateThickness)</code></p>
+<h4 id="where-8">Where</h4>
+<ul>
+<li><code>deviceWidth</code>: the width of the device</li>
+<li><code>deviceHeight</code>: the height of the device</li>
+<li><code>wallThickness</code>: the wall thickness of the top and bottom holders</li>
+<li><code>plateThickness</code>: the thickness of the plate</li>
+</ul>
+<h4 id="associated-global-variables-2">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone5_BasePlate_Thickness</code>: the thickness of the plate</li>
+</ul>
+<hr />
+<h3 id="iphone5_platewithsidehandle"><code>iPhone5_PlateWithSideHandle</code></h3>
+<p>A simple plate where the iPhone 5 can be mounted using <code>iPhone5_BottomHolder</code> and <code>iPhone5_TopHolder</code> and that adds a side handle to the device. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPhone5_PlateWithSideHandle(height,handleWidth,handleHoleWidth,handleHoleBorder,wallThickness,plateThickness,edgeRadius)</code></p>
+<h4 id="where-9">Where</h4>
+<ul>
+<li><code>height</code>: the height of the plate</li>
+<li><code>handleWidth</code>: the width of the handle</li>
+<li><code>handleHoleBorder</code>: the size of the border of the handle hole</li>
+<li><code>handleHoleWidth</code>: the size of the handle hole</li>
+<li><code>wallThickness</code>: the global wall thickness</li>
+<li><code>plateThickness</code>: the thickness of the plate</li>
+<li><code>edgeRadius</code>: the vertical edge radius</li>
+</ul>
+<h4 id="associated-global-variables-3">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone5_PlateWithHandle_HandleWidth</code>: the width of the handle</li>
+<li><code>iPhone5_PlateWithHandle_HandleHoleWidth</code>: the size of the handle hole</li>
+<li><code>iPhone5_PlateWithHandle_HandleHoleBorder</code>: the size of the border of the handle hole</li>
+<li><code>iPhone5_PlateWithHandle_Thickness</code>: the plate thickness</li>
+<li><code>iPhone5_PlateWithHandle_EdgeRadius</code>: the vertical edge radius</li>
+</ul>
+<hr />
+<h3 id="iphone5_holderplate"><code>iPhone5_HolderPlate</code></h3>
+<p>A simple plate where the iPhone 5 can be mounted using <code>iPhone5_BottomHolder</code> and <code>iPhone5_TopHolder</code> and that adds handles to the device. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPhone5_HolderPlate(handleWidth,wallThickness,plateThickness)</code></p>
+<h4 id="where-10">Where</h4>
+<ul>
+<li><code>handleWidth</code>: the width of the handles around the device</li>
+<li><code>wallThickness</code>: the global wall thickness</li>
+<li><code>plateThickness</code>: the plate thickness</li>
+</ul>
+<h4 id="associated-global-variables-4">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone5_HolderPlate_Thickness</code>: the plate thickness</li>
+<li><code>iPhone5_HolderPlate_HandlesWidth</code>: the width of the handles around the device</li>
+<li><code>iPhone5_HolderPlate_EdgeRadius</code>: the radius of the vertical edges of the plate</li>
+</ul>
+<hr />
+<h3 id="iphone5_holderplateelec"><code>iPhone5_HolderPlateElec</code></h3>
+<p>Similar to <code>iPhone5_HolderPlate()</code> except that a module has been adeed to install electronic components to it. This part is meant to be laser cut from an acrylic plate.</p>
+<p>`iPhone5_HolderPlateElec(handleWidth,wallThickness,plateThickness,elecModuleHeight,elecModuleEdgeRadius)</p>
+<h4 id="where-11">Where</h4>
+<ul>
+<li><code>handleWidth</code>: the size of the handles</li>
+<li><code>wallThickness</code>: the global wall thickness</li>
+<li><code>plateThickness</code>: the plate thickness</li>
+<li><code>elecModuleHeight</code>: the electronic module height</li>
+<li><code>elecModuleEdgeRadius</code>: the electronic module edge radius</li>
+</ul>
+<h4 id="associated-global-variables-5">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone5_HolderPlateElec_ModuleHeight</code>: the electronic module height</li>
+<li><code>iPhone5_HolderPlateElec_ModuleEdgeRadius</code>: the electronic module edge radius</li>
+<li><code>iPhone5_HolderPlateElec_BoxHoleRadius</code>: the radius of the screw holes</li>
+</ul>
+<hr />
+<h3 id="iphone5_holderplateelectop"><code>iPhone5_HolderPlateElecTop</code></h3>
+<p>A simple cover for the electronic components used with <code>iPhone5_HolderPlateElec</code>. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPhone5_HolderPlateElecTop(wallThickness,plateThickness,elecModuleHeight,elecModuleEdgeRadius)</code></p>
+<h4 id="where-12">Where</h4>
+<ul>
+<li><code>wallThickness</code>: the global wall thickness</li>
+<li><code>plateThickness</code>: the plate thickness</li>
+<li><code>elecModuleHeight</code>: the electronic module height</li>
+<li><code>elecModuleEdgeRadius</code>: the electronic module edge radius</li>
+</ul>
+<h4 id="associated-global-variables-6">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone5_HolderPlateElecTop_Thickness</code>: the plate thickness</li>
+</ul>
+<hr />
+<h3 id="iphone5_generichorn"><code>iPhone5_GenericHorn</code></h3>
+<p>A customizable horn that plugs to the built-in speaker of the iPhone 5. It comes with a base plate that is used to easily glue the horn to the bottom holder. This part is meant to be printed with PLA or ABS.</p>
+<p><code>iPhone5_GenericHorn(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness)</code></p>
+<h4 id="where-13">Where</h4>
+<ul>
+<li><code>hornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>hornLength</code>: the length of the horn</li>
+<li><code>hornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>hornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>wallThickness</code>: the thickness of the walls of the different modules</li>
+<li><code>hornThickness</code>: the thickness of the walls of the horn</li>
+<li><code>basePlateThickness</code>: the thickness of the base plate</li>
+<li><code>lighteningConnectorHole</code>: if true, adds a hole to the base plate for the ligthening connector</li>
+</ul>
+<hr />
+<h3 id="iphone5_smallpassiveamp"><code>iPhone5_SmallPassiveAmp</code></h3>
+<p>A small passive amplifier for the iPhone 5 that can be glued to <code>iPhone5_BottomHolder</code>. This part is meant to be printed with PLA or ABS.</p>
+<p><code>iPhone5_SmallPassiveAmp(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness)</code></p>
+<h4 id="where-14">Where</h4>
+<ul>
+<li><code>hornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>hornLength</code>: the length of the horn</li>
+<li><code>hornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>hornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>wallThickness</code>: the thickness of the walls of the different modules</li>
+<li><code>hornThickness</code>: the thickness of the walls of the horn</li>
+<li><code>basePlateThickness</code>: the thickness of the base plate</li>
+</ul>
+<h4 id="associated-global-variables-7">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone5_SmallPassiveAmp_HornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>iPhone5_SmallPassiveAmp_HornLength</code>: the length of the horn</li>
+<li><code>iPhone5_SmallPassiveAmp_HornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>iPhone5_SmallPassiveAmp_HornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>iPhone5_SmallPassiveAmp_BaseThickness</code>: the thickness of the base plate</li>
+<li><code>iPhone5_SmallPassiveAmp_HornThickness</code>: the thickness of the walls of the horn</li>
+</ul>
+<hr />
+<h3 id="iphone5_largepassiveamp"><code>iPhone5_LargePassiveAmp</code></h3>
+<p>A large passive amplifier with a reinforcement bar for the iPhone 5 that can be glued to <code>iPhone5_BottomHolder</code>. This part is meant to be printed with PLA or ABS.</p>
+<p><code>iPhone5_LargePassiveAmp(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness,reinforcementBarWidth)</code></p>
+<h4 id="where-15">Where</h4>
+<ul>
+<li><code>hornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>hornLength</code>: the length of the horn</li>
+<li><code>hornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>hornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>wallThickness</code>: the thickness of the walls of the different modules</li>
+<li><code>hornThickness</code>: the thickness of the walls of the horn</li>
+<li><code>basePlateThickness</code>: the thickness of the base plate</li>
+<li><code>reinforcementBarWidth</code>: the width of the reinforcement bar</li>
+</ul>
+<h4 id="associated-global-variables-8">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone5_LargePassiveAmp_HornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>iPhone5_LargePassiveAmp_HornLength</code>: the length of the horn</li>
+<li><code>iPhone5_LargePassiveAmp_HornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>iPhone5_LargePassiveAmp_HornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>iPhone5_LargePassiveAmp_BaseThickness</code>: the thickness of the base plate</li>
+<li><code>iPhone5_LargePassiveAmp_HornThickness</code>: the thickness of the walls of the horn</li>
+<li><code>iPhone5_LargePassiveAmp_ReinforcementBarWidth</code>: the width of the reinforcement bar</li>
+</ul>
+<hr />
+<h3 id="iphone5_case"><code>iPhone5_Case</code></h3>
+<p>A simple iPhone 5 case.</p>
+<hr />
+<h3 id="iphone5_casewithsidehandle"><code>iPhone5_CaseWithSideHandle</code></h3>
+<p>A iPhone 5 case with a side handle.</p>
+<hr />
+<h3 id="iphone5_casewithsmallpassiveamp"><code>iPhone5_CaseWithSmallPassiveAmp</code></h3>
+<p>A case for the iPhone 5 with a small passive amplifier.</p>
+<hr />
+<h3 id="iphone5_casewithlargepassiveamp"><code>iPhone5_CaseWithLargePassiveAmp</code></h3>
+<p>A case for the iPhone 5 with a large passive amplifier.</p>
+<hr />
+<h3 id="iphone5_casewithsmallpassiveamp-1"><code>iPhone5_CaseWithSmallPassiveAmp</code></h3>
+<p>A case for the iPhone 5 with a small passive amplifier.</p>
+<hr />
+<h3 id="iphone5_casewithsidehandleandpassiveamp"><code>iPhone5_CaseWithSideHandleAndPassiveAmp</code></h3>
+<p>An iPhone 5 case with a side handle and a small passive amplifier.</p>
+<hr />
+<h3 id="iphone5_casetop"><code>iPhone5_CaseTop</code></h3>
+<p>A case that turn the iPhone 5 into a top.</p>
+<hr />
+<h3 id="iphone5_caserock"><code>iPhone5_CaseRock</code></h3>
+<p>A iPhone 5 case with a swing on it to rock it.</p>
+<p><code>iPhone5_CaseRock(swingWidth)</code></p>
+<h4 id="where-16">Where</h4>
+<ul>
+<li><code>swingWidth</code>: the width of the swing</li>
+</ul>
+<h4 id="associated-global-variables-9">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone5_CaseRock_SwingWidth</code>: the width of the swing</li>
+</ul>
+<hr />
+<h3 id="iphone5_holderwithelectronics"><code>iPhone5_HolderWithElectronics</code></h3>
+<p>A case for the iPhone 5 with handles and that can host extra electronic components.</p>
+<h3 id="iphone6plus"><code>iPhone6Plus</code></h3>
+<p>A very simple iPhone 6 model.</p>
+<hr />
+<h3 id="iphone6plus_bottomholder"><code>iPhone6Plus_BottomHolder</code></h3>
+<p>A customizable element that can be used to hold an iPhone 6 Plus from the bottom. This part is meant to be printed with an elastic material such as Ninjaflex.</p>
+<p><code>iPhone6Plus_BottomHolder(wallThickness,depth,speakerHole,audioJackHole,lighteningHole)</code></p>
+<h4 id="where-17">Where</h4>
+<ul>
+<li><code>wallThickness</code>: the thickness of the walls</li>
+<li><code>deviceInnerHeight</code>: the depth of the device in the holder<br />
+</li>
+<li><code>speakerHole</code>: hides the speaker hole if false</li>
+<li><code>audioJackHole</code>: hides the audio jack hole if false</li>
+<li><code>lighteningHole</code>: hides the lightening port hole if false</li>
+</ul>
+<h4 id="associated-global-variables-10">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6Plus_BottomHolder_Depth</code>: the depth of the device in the holder</li>
+<li><code>iPhone6Plus_BottomHolder_HomeButtonHoleRadius</code>: the radius of the home button hole</li>
+<li><code>iPhone6Plus_BottomHolder_SpeakerHoleWidth</code>: the speaker hole width</li>
+<li><code>iPhone6Plus_BottomHolder_SpeakerHoleHeight</code>: the speaker hole height</li>
+<li><code>iPhone6Plus_BottomHolder_SpeakerHoleXOffset</code>: the speaker hole X position</li>
+<li><code>iPhone6Plus_BottomHolder_SpeakerHoleYOffset</code>: the speaker hole Y position</li>
+<li><code>iPhone6Plus_BottomHolder_AudioJackHoleWidth</code>: the audio jack hole width</li>
+<li><code>iPhone6Plus_BottomHolder_AudioJackHoleXOffset</code>: the audio jack hole X position</li>
+<li><code>iPhone6Plus_BottomHolder_LighteningHoleWidth</code>: the lightening hole width</li>
+<li><code>iPhone6Plus_BottomHolder_LighteningHoleHeight</code>: the lightening hole height</li>
+</ul>
+<hr />
+<h3 id="iphone6plus_topholder"><code>iPhone6Plus_TopHolder</code></h3>
+<p>An element that can be used to hold an iPhone 6 Plus from the top. This part is meant to be printed with an elastic material such as Ninjaflex.</p>
+<p>iPhone6Plus_TopHolder(wallThickness,depth)`</p>
+<h3 id="where-18">Where</h3>
+<p><code>wallThickness</code>: the thcikness of the walls <code>depth</code>: the depth of the device in the holder</p>
+<h3 id="associated-global-variables-11">Associated Global Variables</h3>
+<p><code>iPhone6Plus_TopHolder_Depth</code>: the depth of the device in the holder <code>iPhone6Plus_TopHolder_CameraHoleRadius</code>: the radius of the camera hole <code>iPhone6Plus_TopHolder_CameraHoleXOffset</code>: the camera hole X position <code>iPhone6Plus_TopHolder_CameraHoleYOffset</code>: the camera hole Y position <code>iPhone6Plus_TopHolder_OnOffHoleWidth</code>: the on/off button width <code>iPhone6Plus_TopHolder_OnOffHoleHeight</code>: the on/off button height <code>iPhone6Plus_TopHolder_OnOffHoleXOffset</code>: the on/off button X position <code>iPhone6Plus_TopHolder_OnOffHoleYOffset</code>: the on/off button Y position</p>
+<hr />
+<h3 id="iphone6plus_baseplate"><code>iPhone6Plus_BasePlate</code></h3>
+<p>A simple plate to put the bottom and top holder together. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPhone6Plus_BasePlate(wallThickness,plateThickness)</code></p>
+<h4 id="where-19">Where</h4>
+<ul>
+<li><code>deviceWidth</code>: the width of the device</li>
+<li><code>deviceHeight</code>: the height of the device</li>
+<li><code>wallThickness</code>: the wall thickness of the top and bottom holders</li>
+<li><code>plateThickness</code>: the thickness of the plate</li>
+</ul>
+<h4 id="associated-global-variables-12">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6Plus_BasePlate_Thickness</code>: the thickness of the plate</li>
+</ul>
+<hr />
+<h3 id="iphone6plus_platewithsidehandle"><code>iPhone6Plus_PlateWithSideHandle</code></h3>
+<p>A simple plate where the iPhone 6 Plus can be mounted using <code>iPhone6Plus_BottomHolder</code> and <code>iPhone6Plus_TopHolder</code> and that adds a side handle to the device. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPhone6Plus_PlateWithSideHandle(height,handleWidth,handleHoleWidth,handleHoleBorder,wallThickness,plateThickness,edgeRadius)</code></p>
+<h4 id="where-20">Where</h4>
+<ul>
+<li><code>height</code>: the height of the plate</li>
+<li><code>handleWidth</code>: the width of the handle</li>
+<li><code>handleHoleBorder</code>: the size of the border of the handle hole</li>
+<li><code>handleHoleWidth</code>: the size of the handle hole</li>
+<li><code>wallThickness</code>: the global wall thickness</li>
+<li><code>plateThickness</code>: the thickness of the plate</li>
+<li><code>edgeRadius</code>: the vertical edge radius</li>
+</ul>
+<h4 id="associated-global-variables-13">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6Plus_PlateWithHandle_HandleWidth</code>: the width of the handle</li>
+<li><code>iPhone6Plus_PlateWithHandle_HandleHoleWidth</code>: the size of the handle hole</li>
+<li><code>iPhone6Plus_PlateWithHandle_HandleHoleBorder</code>: the size of the border of the handle hole</li>
+<li><code>iPhone6Plus_PlateWithHandle_Thickness</code>: the plate thickness</li>
+<li><code>iPhone6Plus_PlateWithHandle_EdgeRadius</code>: the vertical edge radius</li>
+</ul>
+<hr />
+<h3 id="iphone6plus_holderplate"><code>iPhone6Plus_HolderPlate</code></h3>
+<p>A simple plate where the iPhone 6 Plus can be mounted using <code>iPhone6Plus_BottomHolder</code> and <code>iPhone6Plus_TopHolder</code> and that adds handles to the device. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPhone6Plus_HolderPlate(handleWidth,wallThickness,plateThickness)</code></p>
+<h4 id="where-21">Where</h4>
+<ul>
+<li><code>handleWidth</code>: the width of the handles around the device</li>
+<li><code>wallThickness</code>: the global wall thickness</li>
+<li><code>plateThickness</code>: the plate thickness</li>
+</ul>
+<h4 id="associated-global-variables-14">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6Plus_HolderPlate_Thickness</code>: the plate thickness</li>
+<li><code>iPhone6Plus_HolderPlate_HandlesWidth</code>: the width of the handles around the device</li>
+<li><code>iPhone6Plus_HolderPlate_EdgeRadius</code>: the radius of the vertical edges of the plate</li>
+</ul>
+<hr />
+<h3 id="iphone6plus_holderplateelec"><code>iPhone6Plus_HolderPlateElec</code></h3>
+<p>Similar to <code>iPhone6Plus_HolderPlate()</code> except that a module has been adeed to install electronic components to it. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPhone6Plus_HolderPlateElec(handleWidth,wallThickness,plateThickness,elecModuleHeight,elecModuleEdgeRadius)</code></p>
+<h4 id="where-22">Where</h4>
+<ul>
+<li><code>handleWidth</code>: the size of the handles</li>
+<li><code>wallThickness</code>: the global wall thickness</li>
+<li><code>plateThickness</code>: the plate thickness</li>
+<li><code>elecModuleHeight</code>: the electronic module height</li>
+<li><code>elecModuleEdgeRadius</code>: the electronic module edge radius</li>
+</ul>
+<h4 id="associated-global-variables-15">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6Plus_HolderPlateElec_ModuleHeight</code>: the electronic module height</li>
+<li><code>iPhone6Plus_HolderPlateElec_ModuleEdgeRadius</code>: the electronic module edge radius</li>
+<li><code>iPhone6Plus_HolderPlateElec_BoxHoleRadius</code>: the radius of the screw holes</li>
+</ul>
+<hr />
+<h3 id="iphone6plus_holderplateelectop"><code>iPhone6Plus_HolderPlateElecTop</code></h3>
+<p>A simple cover for the electronic components used with <code>iPhone6Plus_HolderPlateElec</code>. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPhone6Plus_HolderPlateElecTop(wallThickness,plateThickness,elecModuleHeight,elecModuleEdgeRadius)</code></p>
+<h4 id="where-23">Where</h4>
+<ul>
+<li><code>wallThickness</code>: the global wall thickness</li>
+<li><code>plateThickness</code>: the plate thickness</li>
+<li><code>elecModuleHeight</code>: the electronic module height</li>
+<li><code>elecModuleEdgeRadius</code>: the electronic module edge radius</li>
+</ul>
+<h4 id="associated-global-variables-16">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6Plus_HolderPlateElecTop_Thickness</code>: the plate thickness</li>
+</ul>
+<hr />
+<h3 id="iphone6plus_generichorn"><code>iPhone6Plus_GenericHorn</code></h3>
+<p>A customizable horn that plugs to the built-in speaker of the iPhone 6 Plus. It comes with a base plate that is used to easily glue the horn to the bottom holder. This part is meant to be printed with PLA or ABS.</p>
+<p><code>iPhone6Plus_GenericHorn(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness)</code></p>
+<h4 id="where-24">Where</h4>
+<ul>
+<li><code>hornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>hornLength</code>: the length of the horn</li>
+<li><code>hornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>hornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>wallThickness</code>: the thickness of the walls of the different modules</li>
+<li><code>hornThickness</code>: the thickness of the walls of the horn</li>
+<li><code>basePlateThickness</code>: the thickness of the base plate</li>
+<li><code>lighteningConnectorHole</code>: if true, adds a hole to the base plate for the ligthening connector</li>
+</ul>
+<hr />
+<h3 id="iphone6plus_smallpassiveamp"><code>iPhone6Plus_SmallPassiveAmp</code></h3>
+<p>A small passive amplifier for the iPhone 6 Plus that can be glued to <code>iPhone6Plus_BottomHolder</code>. This part is meant to be printed with PLA or ABS.</p>
+<p><code>iPhone6Plus_SmallPassiveAmp(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness)</code></p>
+<h4 id="where-25">Where</h4>
+<ul>
+<li><code>hornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>hornLength</code>: the length of the horn</li>
+<li><code>hornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>hornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>wallThickness</code>: the thickness of the walls of the different modules</li>
+<li><code>hornThickness</code>: the thickness of the walls of the horn</li>
+<li><code>basePlateThickness</code>: the thickness of the base plate</li>
+</ul>
+<h4 id="associated-global-variables-17">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6Plus_SmallPassiveAmp_HornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>iPhone6Plus_SmallPassiveAmp_HornLength</code>: the length of the horn</li>
+<li><code>iPhone6Plus_SmallPassiveAmp_HornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>iPhone6Plus_SmallPassiveAmp_HornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>iPhone6Plus_SmallPassiveAmp_BaseThickness</code>: the thickness of the base plate</li>
+<li><code>iPhone6Plus_SmallPassiveAmp_HornThickness</code>: the thickness of the walls of the horn</li>
+</ul>
+<hr />
+<h3 id="iphone6plus_largepassiveamp"><code>iPhone6Plus_LargePassiveAmp</code></h3>
+<p>A large passive amplifier with a reinforcement bar for the iPhone 6 Plus that can be glued to <code>iPhone6Plus_BottomHolder</code>. This part is meant to be printed with PLA or ABS.</p>
+<p><code>iPhone6Plus_LargePassiveAmp(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness,reinforcementBarWidth)</code></p>
+<h4 id="where-26">Where</h4>
+<ul>
+<li><code>hornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>hornLength</code>: the length of the horn</li>
+<li><code>hornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>hornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>wallThickness</code>: the thickness of the walls of the different modules</li>
+<li><code>hornThickness</code>: the thickness of the walls of the horn</li>
+<li><code>basePlateThickness</code>: the thickness of the base plate</li>
+<li><code>reinforcementBarWidth</code>: the width of the reinforcement bar</li>
+</ul>
+<h4 id="associated-global-variables-18">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6Plus_LargePassiveAmp_HornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>iPhone6Plus_LargePassiveAmp_HornLength</code>: the length of the horn</li>
+<li><code>iPhone6Plus_LargePassiveAmp_HornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>iPhone6Plus_LargePassiveAmp_HornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>iPhone6Plus_LargePassiveAmp_BaseThickness</code>: the thickness of the base plate</li>
+<li><code>iPhone6Plus_LargePassiveAmp_HornThickness</code>: the thickness of the walls of the horn</li>
+<li><code>iPhone6Plus_LargePassiveAmp_ReinforcementBarWidth</code>: the width of the reinforcement bar</li>
+</ul>
+<hr />
+<h3 id="iphone6plus_case"><code>iPhone6Plus_Case</code></h3>
+<p>A simple iPhone 6 Plus case.</p>
+<hr />
+<h3 id="iphone6plus_casewithsmallpassiveamp"><code>iPhone6Plus_CaseWithSmallPassiveAmp</code></h3>
+<p>A case for the iPhone 6 Plus with a small passive amplifier.</p>
+<hr />
+<h3 id="iphone6plus_casewithsmallpassiveamp-1"><code>iPhone6Plus_CaseWithSmallPassiveAmp</code></h3>
+<p>A case for the iPhone 6 Plus with a small passive amplifier.</p>
+<hr />
+<h3 id="iphone6plus_casewithsidehandleandpassiveamp"><code>iPhone6Plus_CaseWithSideHandleAndPassiveAmp</code></h3>
+<p>An iPhone 6 Plus case with a side handle and a small passive amplifier.</p>
+<hr />
+<h3 id="iphone6plus_caserock"><code>iPhone6Plus_CaseRock</code></h3>
+<p>A iPhone 6 Plus case with a swing on it to rock it.</p>
+<p><code>iPhone6Plus_CaseRock(swingWidth)</code></p>
+<h4 id="where-27">Where</h4>
+<ul>
+<li><code>swingWidth</code>: the width of the swing</li>
+</ul>
+<h4 id="associated-global-variables-19">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6Plus_CaseRock_SwingWidth</code>: the width of the swing</li>
+</ul>
+<hr />
+<h3 id="iphone6plus_holderwithelectronics"><code>iPhone6Plus_HolderWithElectronics</code></h3>
+<p>A case for the iPhone 6 Plus with handles and that can host extra electronic components.</p>
+<h3 id="iphone6"><code>iPhone6</code></h3>
+<p>A very simple iPhone 6 model.</p>
+<hr />
+<h3 id="iphone6_bottomholder"><code>iPhone6_BottomHolder</code></h3>
+<p>A customizable element that can be used to hold an iPhone 6 from the bottom. This part is meant to be printed with an elastic material such as Ninjaflex.</p>
+<p><code>iPhone6_BottomHolder(wallThickness,depth,speakerHole,audioJackHole,lighteningHole)</code></p>
+<h4 id="where-28">Where</h4>
+<ul>
+<li><code>wallThickness</code>: the thickness of the walls</li>
+<li><code>deviceInnerHeight</code>: the depth of the device in the holder<br />
+</li>
+<li><code>speakerHole</code>: hides the speaker hole if false</li>
+<li><code>audioJackHole</code>: hides the audio jack hole if false</li>
+<li><code>lighteningHole</code>: hides the lightening port hole if false</li>
+</ul>
+<h4 id="associated-global-variables-20">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6_BottomHolder_Depth</code>: the depth of the device in the holder</li>
+<li><code>iPhone6_BottomHolder_HomeButtonHoleRadius</code>: the radius of the home button hole</li>
+<li><code>iPhone6_BottomHolder_SpeakerHoleWidth</code>: the speaker hole width</li>
+<li><code>iPhone6_BottomHolder_SpeakerHoleHeight</code>: the speaker hole height</li>
+<li><code>iPhone6_BottomHolder_SpeakerHoleXOffset</code>: the speaker hole X position</li>
+<li><code>iPhone6_BottomHolder_SpeakerHoleYOffset</code>: the speaker hole Y position</li>
+<li><code>iPhone6_BottomHolder_AudioJackHoleWidth</code>: the audio jack hole width</li>
+<li><code>iPhone6_BottomHolder_AudioJackHoleXOffset</code>: the audio jack hole X position</li>
+<li><code>iPhone6_BottomHolder_LighteningHoleWidth</code>: the lightening hole width</li>
+<li><code>iPhone6_BottomHolder_LighteningHoleHeight</code>: the lightening hole height</li>
+</ul>
+<hr />
+<h3 id="iphone6_topholder"><code>iPhone6_TopHolder</code></h3>
+<p>An element that can be used to hold an iPhone 6 from the top. This part is meant to be printed with an elastic material such as Ninjaflex.</p>
+<p><code>iPhone6_TopHolder(wallThickness,depth)</code></p>
+<h4 id="where-29">Where</h4>
+<ul>
+<li><code>wallThickness</code>: the thcikness of the walls</li>
+<li><code>depth</code>: the depth of the device in the holder</li>
+</ul>
+<h4 id="associated-global-variables-21">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6_TopHolder_Depth</code>: the depth of the device in the holder</li>
+<li><code>iPhone6_TopHolder_CameraHoleRadius</code>: the radius of the camera hole</li>
+<li><code>iPhone6_TopHolder_CameraHoleXOffset</code>: the camera hole X position</li>
+<li><code>iPhone6_TopHolder_CameraHoleYOffset</code>: the camera hole Y position</li>
+<li><code>iPhone6_TopHolder_OnOffHoleWidth</code>: the on/off button width</li>
+<li><code>iPhone6_TopHolder_OnOffHoleHeight</code>: the on/off button height</li>
+<li><code>iPhone6_TopHolder_OnOffHoleXOffset</code>: the on/off button X position</li>
+<li><code>iPhone6_TopHolder_OnOffHoleYOffset</code>: the on/off button Y position</li>
+</ul>
+<hr />
+<h3 id="iphone6_baseplate"><code>iPhone6_BasePlate</code></h3>
+<p>A simple plate to put the bottom and top holder together. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPhone6_BasePlate(wallThickness,plateThickness)</code></p>
+<h4 id="where-30">Where</h4>
+<ul>
+<li><code>deviceWidth</code>: the width of the device</li>
+<li><code>deviceHeight</code>: the height of the device</li>
+<li><code>wallThickness</code>: the wall thickness of the top and bottom holders</li>
+<li><code>plateThickness</code>: the thickness of the plate</li>
+</ul>
+<h4 id="associated-global-variables-22">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6_BasePlate_Thickness</code>: the thickness of the plate</li>
+</ul>
+<hr />
+<h3 id="iphone6_platewithsidehandle"><code>iPhone6_PlateWithSideHandle</code></h3>
+<p>A simple plate where the iPhone 6 can be mounted using <code>iPhone6_BottomHolder</code> and <code>iPhone6_TopHolder</code> and that adds a side handle to the device. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPhone6_PlateWithSideHandle(height,handleWidth,handleHoleWidth,handleHoleBorder,wallThickness,plateThickness,edgeRadius)</code></p>
+<h4 id="where-31">Where</h4>
+<ul>
+<li><code>height</code>: the height of the plate</li>
+<li><code>handleWidth</code>: the width of the handle</li>
+<li><code>handleHoleBorder</code>: the size of the border of the handle hole</li>
+<li><code>handleHoleWidth</code>: the size of the handle hole</li>
+<li><code>wallThickness</code>: the global wall thickness</li>
+<li><code>plateThickness</code>: the thickness of the plate</li>
+<li><code>edgeRadius</code>: the vertical edge radius</li>
+</ul>
+<h4 id="associated-global-variables-23">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6_PlateWithHandle_HandleWidth</code>: the width of the handle</li>
+<li><code>iPhone6_PlateWithHandle_HandleHoleWidth</code>: the size of the handle hole</li>
+<li><code>iPhone6_PlateWithHandle_HandleHoleBorder</code>: the size of the border of the handle hole</li>
+<li><code>iPhone6_PlateWithHandle_Thickness</code>: the plate thickness</li>
+<li><code>iPhone6_PlateWithHandle_EdgeRadius</code>: the vertical edge radius</li>
+</ul>
+<hr />
+<h3 id="iphone6_holderplate"><code>iPhone6_HolderPlate</code></h3>
+<p>A simple plate where the iPhone 6 can be mounted using <code>iPhone6_BottomHolder</code> and <code>iPhone6_TopHolder</code> and that adds handles to the device. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPhone6_HolderPlate(handleWidth,wallThickness,plateThickness)</code></p>
+<h4 id="where-32">Where</h4>
+<ul>
+<li><code>handleWidth</code>: the width of the handles around the device</li>
+<li><code>wallThickness</code>: the global wall thickness</li>
+<li><code>plateThickness</code>: the plate thickness</li>
+</ul>
+<h4 id="associated-global-variables-24">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6_HolderPlate_Thickness</code>: the plate thickness</li>
+<li><code>iPhone6_HolderPlate_HandlesWidth</code>: the width of the handles around the device</li>
+<li><code>iPhone6_HolderPlate_EdgeRadius</code>: the radius of the vertical edges of the plate</li>
+</ul>
+<hr />
+<h3 id="iphone6_holderplateelec"><code>iPhone6_HolderPlateElec</code></h3>
+<p>Similar to <code>iPhone6_HolderPlate()</code> except that a module has been adeed to install electronic components to it. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPhone6_HolderPlateElec(handleWidth,wallThickness,plateThickness,elecModuleHeight,elecModuleEdgeRadius)</code></p>
+<h4 id="where-33">Where</h4>
+<ul>
+<li><code>handleWidth</code>: the size of the handles</li>
+<li><code>wallThickness</code>: the global wall thickness</li>
+<li><code>plateThickness</code>: the plate thickness</li>
+<li><code>elecModuleHeight</code>: the electronic module height</li>
+<li><code>elecModuleEdgeRadius</code>: the electronic module edge radius</li>
+</ul>
+<h4 id="associated-global-variables-25">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6_HolderPlateElec_ModuleHeight</code>: the electronic module height</li>
+<li><code>iPhone6_HolderPlateElec_ModuleEdgeRadius</code>: the electronic module edge radius</li>
+<li><code>iPhone6_HolderPlateElec_BoxHoleRadius</code>: the radius of the screw holes</li>
+</ul>
+<hr />
+<h3 id="iphone6_holderplateelectop"><code>iPhone6_HolderPlateElecTop</code></h3>
+<p>A simple cover for the electronic components used with <code>iPhone6_HolderPlateElec</code>. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPhone6_HolderPlateElecTop(wallThickness,plateThickness,elecModuleHeight,elecModuleEdgeRadius)</code></p>
+<h4 id="where-34">Where</h4>
+<ul>
+<li><code>wallThickness</code>: the global wall thickness</li>
+<li><code>plateThickness</code>: the plate thickness</li>
+<li><code>elecModuleHeight</code>: the electronic module height</li>
+<li><code>elecModuleEdgeRadius</code>: the electronic module edge radius</li>
+</ul>
+<h4 id="associated-global-variables-26">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6_HolderPlateElecTop_Thickness</code>: the plate thickness</li>
+</ul>
+<hr />
+<h3 id="iphone6_generichorn"><code>iPhone6_GenericHorn</code></h3>
+<p>A customizable horn that plugs to the built-in speaker of the iPhone 6. It comes with a base plate that is used to easily glue the horn to the bottom holder. This part is meant to be printed with PLA or ABS.</p>
+<p><code>iPhone6_GenericHorn(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness)</code></p>
+<h4 id="where-35">Where</h4>
+<ul>
+<li><code>hornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>hornLength</code>: the length of the horn</li>
+<li><code>hornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>hornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>wallThickness</code>: the thickness of the walls of the different modules</li>
+<li><code>hornThickness</code>: the thickness of the walls of the horn</li>
+<li><code>basePlateThickness</code>: the thickness of the base plate</li>
+<li><code>lighteningConnectorHole</code>: if true, adds a hole to the base plate for the ligthening connector</li>
+</ul>
+<hr />
+<h3 id="iphone6_smallpassiveamp"><code>iPhone6_SmallPassiveAmp</code></h3>
+<p>A small passive amplifier for the iPhone 6 that can be glued to <code>iPhone6_BottomHolder</code>. This part is meant to be printed with PLA or ABS.</p>
+<p><code>iPhone6_SmallPassiveAmp(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness)</code></p>
+<h4 id="where-36">Where</h4>
+<ul>
+<li><code>hornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>hornLength</code>: the length of the horn</li>
+<li><code>hornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>hornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>wallThickness</code>: the thickness of the walls of the different modules</li>
+<li><code>hornThickness</code>: the thickness of the walls of the horn</li>
+<li><code>basePlateThickness</code>: the thickness of the base plate</li>
+</ul>
+<h4 id="associated-global-variables-27">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6_SmallPassiveAmp_HornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>iPhone6_SmallPassiveAmp_HornLength</code>: the length of the horn</li>
+<li><code>iPhone6_SmallPassiveAmp_HornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>iPhone6_SmallPassiveAmp_HornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>iPhone6_SmallPassiveAmp_BaseThickness</code>: the thickness of the base plate</li>
+<li><code>iPhone6_SmallPassiveAmp_HornThickness</code>: the thickness of the walls of the horn</li>
+</ul>
+<hr />
+<h3 id="iphone6_largepassiveamp"><code>iPhone6_LargePassiveAmp</code></h3>
+<p>A large passive amplifier with a reinforcement bar for the iPhone 6 that can be glued to <code>iPhone6_BottomHolder</code>. This part is meant to be printed with PLA or ABS.</p>
+<p><code>iPhone6_LargePassiveAmp(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness,reinforcementBarWidth)</code></p>
+<h4 id="where-37">Where</h4>
+<ul>
+<li><code>hornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>hornLength</code>: the length of the horn</li>
+<li><code>hornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>hornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>wallThickness</code>: the thickness of the walls of the different modules</li>
+<li><code>hornThickness</code>: the thickness of the walls of the horn</li>
+<li><code>basePlateThickness</code>: the thickness of the base plate</li>
+<li><code>reinforcementBarWidth</code>: the width of the reinforcement bar</li>
+</ul>
+<h4 id="associated-global-variables-28">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6_LargePassiveAmp_HornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>iPhone6_LargePassiveAmp_HornLength</code>: the length of the horn</li>
+<li><code>iPhone6_LargePassiveAmp_HornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>iPhone6_LargePassiveAmp_HornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>iPhone6_LargePassiveAmp_BaseThickness</code>: the thickness of the base plate</li>
+<li><code>iPhone6_LargePassiveAmp_HornThickness</code>: the thickness of the walls of the horn</li>
+<li><code>iPhone6_LargePassiveAmp_ReinforcementBarWidth</code>: the width of the reinforcement bar</li>
+</ul>
+<hr />
+<h3 id="iphone6_case"><code>iPhone6_Case</code></h3>
+<p>A simple iPhone 6 case.</p>
+<hr />
+<h3 id="iphone6_casewithsidehandle"><code>iPhone6_CaseWithSideHandle</code></h3>
+<p>A iPhone 6 case with a side handle.</p>
+<hr />
+<h3 id="iphone6_casewithsmallpassiveamp"><code>iPhone6_CaseWithSmallPassiveAmp</code></h3>
+<p>A case for the iPhone 6 with a small passive amplifier.</p>
+<hr />
+<h3 id="iphone6_casewithlargepassiveamp"><code>iPhone6_CaseWithLargePassiveAmp</code></h3>
+<p>A case for the iPhone 6 with a large passive amplifier.</p>
+<hr />
+<h3 id="iphone6_casewithsmallpassiveamp-1"><code>iPhone6_CaseWithSmallPassiveAmp</code></h3>
+<p>A case for the iPhone 6 with a small passive amplifier.</p>
+<hr />
+<h3 id="iphone6_casewithsidehandleandpassiveamp"><code>iPhone6_CaseWithSideHandleAndPassiveAmp</code></h3>
+<p>An iPhone 6 case with a side handle and a small passive amplifier.</p>
+<hr />
+<h3 id="iphone6_casetop"><code>iPhone6_CaseTop</code></h3>
+<p>A case that turn the iPhone 6 into a top.</p>
+<hr />
+<h3 id="iphone6_caserock"><code>iPhone6_CaseRock</code></h3>
+<p>A iPhone 6 case with a swing on it to rock it.</p>
+<p><code>iPhone6_CaseRock(swingWidth)</code></p>
+<h4 id="where-38">Where</h4>
+<ul>
+<li><code>swingWidth</code>: the width of the swing</li>
+</ul>
+<h4 id="associated-global-variables-29">Associated Global Variables</h4>
+<ul>
+<li><code>iPhone6_CaseRock_SwingWidth</code>: the width of the swing</li>
+</ul>
+<hr />
+<h3 id="iphone6_holderwithelectronics"><code>iPhone6_HolderWithElectronics</code></h3>
+<p>A case for the iPhone 6 with handles and that can host extra electronic components.</p>
+<h3 id="ipodtouch6"><code>iPodTouch6</code></h3>
+<p>A very simple iPod Touch 6 model.</p>
+<hr />
+<h3 id="ipodtouch6_bottomholder"><code>iPodTouch6_BottomHolder</code></h3>
+<p>// A customizable element that can be used to hold an iPod Touch 6 from the bottom. This part is meant to be printed with an elastic material such as Ninjaflex.</p>
+<p><code>iPodTouch6_BottomHolder(wallThickness,depth,speakerHole,audioJackHole,lighteningHole)</code></p>
+<h4 id="where-39">Where</h4>
+<ul>
+<li><code>wallThickness</code>: the thickness of the walls</li>
+<li><code>deviceInnerHeight</code>: the depth of the device in the holder<br />
+</li>
+<li><code>speakerHole</code>: hides the speaker hole if false</li>
+<li><code>audioJackHole</code>: hides the audio jack hole if false</li>
+<li><code>lighteningHole</code>: hides the lightening port hole if false</li>
+</ul>
+<h4 id="associated-global-variables-30">Associated Global Variables</h4>
+<ul>
+<li><code>iPodTouch6_BottomHolder_Depth</code>: the depth of the device in the holder</li>
+<li><code>iPodTouch6_BottomHolder_HomeButtonHoleRadius</code>: the radius of the home button hole</li>
+<li><code>iPodTouch6_BottomHolder_SpeakerHoleWidth</code>: the speaker hole width</li>
+<li><code>iPodTouch6_BottomHolder_SpeakerHoleHeight</code>: the speaker hole height</li>
+<li><code>iPodTouch6_BottomHolder_SpeakerHoleXOffset</code>: the speaker hole X position</li>
+<li><code>iPodTouch6_BottomHolder_SpeakerHoleYOffset</code>: the speaker hole Y position</li>
+<li><code>iPodTouch6_BottomHolder_AudioJackHoleWidth</code>: the audio jack hole width</li>
+<li><code>iPodTouch6_BottomHolder_AudioJackHoleXOffset</code>: the audio jack hole X position</li>
+<li><code>iPodTouch6_BottomHolder_LighteningHoleWidth</code>: the lightening hole width</li>
+<li><code>iPodTouch6_BottomHolder_LighteningHoleHeight</code>: the lightening hole height</li>
+</ul>
+<hr />
+<h3 id="ipodtouch6_topholder"><code>iPodTouch6_TopHolder</code></h3>
+<p>An element that can be used to hold an iPod Touch 6 from the top. This part is meant to be printed with an elastic material such as Ninjaflex.</p>
+<p>iPodTouch6_TopHolder(wallThickness,depth)`</p>
+<h3 id="where-40">Where</h3>
+<p><code>wallThickness</code>: the thcikness of the walls <code>depth</code>: the depth of the device in the holder</p>
+<h3 id="associated-global-variables-31">Associated Global Variables</h3>
+<p><code>iPodTouch6_TopHolder_Depth</code>: the depth of the device in the holder <code>iPodTouch6_TopHolder_CameraHoleRadius</code>: the radius of the camera hole <code>iPodTouch6_TopHolder_CameraHoleXOffset</code>: the camera hole X position <code>iPodTouch6_TopHolder_CameraHoleYOffset</code>: the camera hole Y position <code>iPodTouch6_TopHolder_OnOffHoleWidth</code>: the on/off button width <code>iPodTouch6_TopHolder_OnOffHoleHeight</code>: the on/off button height <code>iPodTouch6_TopHolder_OnOffHoleXOffset</code>: the on/off button X position <code>iPodTouch6_TopHolder_OnOffHoleYOffset</code>: the on/off button Y position</p>
+<hr />
+<h3 id="ipodtouch6_baseplate"><code>iPodTouch6_BasePlate</code></h3>
+<p>A simple plate to put the bottom and top holder together. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPodTouch6_BasePlate(wallThickness,plateThickness)</code></p>
+<h4 id="where-41">Where</h4>
+<ul>
+<li><code>deviceWidth</code>: the width of the device</li>
+<li><code>deviceHeight</code>: the height of the device</li>
+<li><code>wallThickness</code>: the wall thickness of the top and bottom holders</li>
+<li><code>plateThickness</code>: the thickness of the plate</li>
+</ul>
+<h4 id="associated-global-variables-32">Associated Global Variables</h4>
+<ul>
+<li><code>iPodTouch6_BasePlate_Thickness</code>: the thickness of the plate</li>
+</ul>
+<hr />
+<h3 id="ipodtouch6_platewithsidehandle"><code>iPodTouch6_PlateWithSideHandle</code></h3>
+<p>A simple plate where the iPod Touch 6 can be mounted using <code>iPodTouch6_BottomHolder</code> and <code>iPodTouch6_TopHolder</code> and that adds a side handle to the device. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPodTouch6_PlateWithSideHandle(height,handleWidth,handleHoleWidth,handleHoleBorder,wallThickness,plateThickness,edgeRadius)</code></p>
+<h4 id="where-42">Where</h4>
+<ul>
+<li><code>height</code>: the height of the plate</li>
+<li><code>handleWidth</code>: the width of the handle</li>
+<li><code>handleHoleBorder</code>: the size of the border of the handle hole</li>
+<li><code>handleHoleWidth</code>: the size of the handle hole</li>
+<li><code>wallThickness</code>: the global wall thickness</li>
+<li><code>plateThickness</code>: the thickness of the plate</li>
+<li><code>edgeRadius</code>: the vertical edge radius</li>
+</ul>
+<h4 id="associated-global-variables-33">Associated Global Variables</h4>
+<ul>
+<li><code>iPodTouch6_PlateWithHandle_HandleWidth</code>: the width of the handle</li>
+<li><code>iPodTouch6_PlateWithHandle_HandleHoleWidth</code>: the size of the handle hole</li>
+<li><code>iPodTouch6_PlateWithHandle_HandleHoleBorder</code>: the size of the border of the handle hole</li>
+<li><code>iPodTouch6_PlateWithHandle_Thickness</code>: the plate thickness</li>
+<li><code>iPodTouch6_PlateWithHandle_EdgeRadius</code>: the vertical edge radius</li>
+</ul>
+<hr />
+<h3 id="ipodtouch6_holderplate"><code>iPodTouch6_HolderPlate</code></h3>
+<p>A simple plate where the iPod Touch 6 can be mounted using <code>iPodTouch6_BottomHolder</code> and <code>iPodTouch6_TopHolder</code> and that adds handles to the device. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPodTouch6_HolderPlate(handleWidth,wallThickness,plateThickness)</code></p>
+<h4 id="where-43">Where</h4>
+<ul>
+<li><code>handleWidth</code>: the width of the handles around the device</li>
+<li><code>wallThickness</code>: the global wall thickness</li>
+<li><code>plateThickness</code>: the plate thickness</li>
+</ul>
+<h4 id="associated-global-variables-34">Associated Global Variables</h4>
+<ul>
+<li><code>iPodTouch6_HolderPlate_Thickness</code>: the plate thickness</li>
+<li><code>iPodTouch6_HolderPlate_HandlesWidth</code>: the width of the handles around the device</li>
+<li><code>iPodTouch6_HolderPlate_EdgeRadius</code>: the radius of the vertical edges of the plate</li>
+</ul>
+<hr />
+<h3 id="ipodtouch6_holderplateelec"><code>iPodTouch6_HolderPlateElec</code></h3>
+<p>Similar to <code>iPodTouch6_HolderPlate()</code> except that a module has been adeed to install electronic components to it. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPodTouch6_HolderPlateElec(handleWidth,wallThickness,plateThickness,elecModuleHeight,elecModuleEdgeRadius)</code></p>
+<h4 id="where-44">Where</h4>
+<ul>
+<li><code>handleWidth</code>: the size of the handles</li>
+<li><code>wallThickness</code>: the global wall thickness</li>
+<li><code>plateThickness</code>: the plate thickness</li>
+<li><code>elecModuleHeight</code>: the electronic module height</li>
+<li><code>elecModuleEdgeRadius</code>: the electronic module edge radius</li>
+</ul>
+<h4 id="associated-global-variables-35">Associated Global Variables</h4>
+<ul>
+<li><code>iPodTouch6_HolderPlateElec_ModuleHeight</code>: the electronic module height</li>
+<li><code>iPodTouch6_HolderPlateElec_ModuleEdgeRadius</code>: the electronic module edge radius</li>
+<li><code>iPodTouch6_HolderPlateElec_BoxHoleRadius</code>: the radius of the screw holes</li>
+</ul>
+<hr />
+<h3 id="ipodtouch6_holderplateelectop"><code>iPodTouch6_HolderPlateElecTop</code></h3>
+<p>A simple cover for the electronic components used with <code>iPodTouch6_HolderPlateElec</code>. This part is meant to be laser cut from an acrylic plate.</p>
+<p><code>iPodTouch6_HolderPlateElecTop(wallThickness,plateThickness,elecModuleHeight,elecModuleEdgeRadius)</code></p>
+<h4 id="where-45">Where</h4>
+<ul>
+<li><code>wallThickness</code>: the global wall thickness</li>
+<li><code>plateThickness</code>: the plate thickness</li>
+<li><code>elecModuleHeight</code>: the electronic module height</li>
+<li><code>elecModuleEdgeRadius</code>: the electronic module edge radius</li>
+</ul>
+<h4 id="associated-global-variables-36">Associated Global Variables</h4>
+<ul>
+<li><code>iPodTouch6_HolderPlateElecTop_Thickness</code>: the plate thickness</li>
+</ul>
+<hr />
+<h3 id="ipodtouch6_generichorn"><code>iPodTouch6_GenericHorn</code></h3>
+<p>A customizable horn that plugs to the built-in speaker of the iPod Touch. It comes with a base plate that is used to easily glue the horn to the bottom holder. This part is meant to be printed with PLA or ABS.</p>
+<p><code>iPodTouch6_GenericHorn(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness)</code></p>
+<h4 id="where-46">Where</h4>
+<ul>
+<li><code>hornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>hornLength</code>: the length of the horn</li>
+<li><code>hornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>hornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>wallThickness</code>: the thickness of the walls of the different modules</li>
+<li><code>hornThickness</code>: the thickness of the walls of the horn</li>
+<li><code>basePlateThickness</code>: the thickness of the base plate</li>
+<li><code>lighteningConnectorHole</code>: if true, adds a hole to the base plate for the ligthening connector</li>
+</ul>
+<hr />
+<h3 id="ipodtouch6_smallpassiveamp"><code>iPodTouch6_SmallPassiveAmp</code></h3>
+<p>A small passive amplifier for the iPod Touch 6 that can be glued to <code>iPodTouch6_BottomHolder</code>. This part is meant to be printed with PLA or ABS.</p>
+<p><code>iPodTouch6_SmallPassiveAmp(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness)</code></p>
+<h4 id="where-47">Where</h4>
+<ul>
+<li><code>hornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>hornLength</code>: the length of the horn</li>
+<li><code>hornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>hornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>wallThickness</code>: the thickness of the walls of the different modules</li>
+<li><code>hornThickness</code>: the thickness of the walls of the horn</li>
+<li><code>basePlateThickness</code>: the thickness of the base plate</li>
+</ul>
+<h4 id="associated-global-variables-37">Associated Global Variables</h4>
+<ul>
+<li><code>iPodTouch6_SmallPassiveAmp_HornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>iPodTouch6_SmallPassiveAmp_HornLength</code>: the length of the horn</li>
+<li><code>iPodTouch6_SmallPassiveAmp_HornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>iPodTouch6_SmallPassiveAmp_HornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>iPodTouch6_SmallPassiveAmp_BaseThickness</code>: the thickness of the base plate</li>
+<li><code>iPodTouch6_SmallPassiveAmp_HornThickness</code>: the thickness of the walls of the horn</li>
+</ul>
+<hr />
+<h3 id="ipodtouch6_largepassiveamp"><code>iPodTouch6_LargePassiveAmp</code></h3>
+<p>A large passive amplifier with a reinforcement bar for the iPod Touch 6 that can be glued to <code>iPodTouch6_BottomHolder</code>. This part is meant to be printed with PLA or ABS.</p>
+<p><code>iPodTouch6_LargePassiveAmp(hornRadius,hornLength,hornDeformationFactor,hornDerivation,wallThickness,hornThickness,basePlateThickness,reinforcementBarWidth)</code></p>
+<h4 id="where-48">Where</h4>
+<ul>
+<li><code>hornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>hornLength</code>: the length of the horn</li>
+<li><code>hornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>hornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>wallThickness</code>: the thickness of the walls of the different modules</li>
+<li><code>hornThickness</code>: the thickness of the walls of the horn</li>
+<li><code>basePlateThickness</code>: the thickness of the base plate</li>
+<li><code>reinforcementBarWidth</code>: the width of the reinforcement bar</li>
+</ul>
+<h4 id="associated-global-variables-38">Associated Global Variables</h4>
+<ul>
+<li><code>iPodTouch6_LargePassiveAmp_HornRadius</code>: the radius of the circular end of the horn</li>
+<li><code>iPodTouch6_LargePassiveAmp_HornLength</code>: the length of the horn</li>
+<li><code>iPodTouch6_LargePassiveAmp_HornDeformationFactor</code>: controls the vertical flatness of the horn with (1=perfect circle, &gt;1=flatened circle)</li>
+<li><code>iPodTouch6_LargePassiveAmp_HornDerivation</code>: displace the position of the circular end relatively to the rectangular end on the horizontal axis</li>
+<li><code>iPodTouch6_LargePassiveAmp_BaseThickness</code>: the thickness of the base plate</li>
+<li><code>iPodTouch6_LargePassiveAmp_HornThickness</code>: the thickness of the walls of the horn</li>
+<li><code>iPodTouch6_LargePassiveAmp_ReinforcementBarWidth</code>: the width of the reinforcement bar</li>
+</ul>
+<hr />
+<h3 id="ipodtouch6_case"><code>iPodTouch6_Case</code></h3>
+<p>A simple iPod Touch 6 case.</p>
+<hr />
+<h3 id="ipodtouch6_casewithsidehandle"><code>iPodTouch6_CaseWithSideHandle</code></h3>
+<p>A iPod Touch 6 case with a side handle.</p>
+<hr />
+<h3 id="ipodtouch6_casewithsmallpassiveamp"><code>iPodTouch6_CaseWithSmallPassiveAmp</code></h3>
+<p>A case for the iPod Touch 6 with a small passive amplifier.</p>
+<hr />
+<h3 id="ipodtouch6_casewithlargepassiveamp"><code>iPodTouch6_CaseWithLargePassiveAmp</code></h3>
+<p>A case for the iPod Touch 6 with a large passive amplifier.</p>
+<hr />
+<h3 id="ipodtouch6_casewithsmallpassiveamp-1"><code>iPodTouch6_CaseWithSmallPassiveAmp</code></h3>
+<p>A case for the iPod Touch 6 with a small passive amplifier.</p>
+<hr />
+<h3 id="ipodtouch6_casewithsidehandleandpassiveamp"><code>iPodTouch6_CaseWithSideHandleAndPassiveAmp</code></h3>
+<p>An iPod Touch 6 case with a side handle and a small passive amplifier.</p>
+<hr />
+<h3 id="ipodtouch6_casetop"><code>iPodTouch6_CaseTop</code></h3>
+<p>A case that turn the iPod Touch 6 into a top.</p>
+<hr />
+<h3 id="ipodtouch6_caserock"><code>iPodTouch6_CaseRock</code></h3>
+<p>A iPod Touch 6 case with a swing on it to rock it.</p>
+<p><code>iPodTouch6_CaseRock(swingWidth)</code></p>
+<h4 id="where-49">Where</h4>
+<ul>
+<li><code>swingWidth</code>: the width of the swing</li>
+</ul>
+<h4 id="associated-global-variables-39">Associated Global Variables</h4>
+<ul>
+<li><code>iPodTouch6_CaseRock_SwingWidth</code>: the width of the swing</li>
+</ul>
+<hr />
+<h3 id="ipodtouch6_holderwithelectronics"><code>iPodTouch6_HolderWithElectronics</code></h3>
+<p>A case for the iPod Touch 6 with handles and that can host extra electronic components.</p>
+<hr />
